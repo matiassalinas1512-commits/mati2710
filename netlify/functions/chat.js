@@ -26,7 +26,16 @@ exports.handler = async (event) => {
       })
     });
     const payload = await response.json();
-    if (!response.ok) return { statusCode: 502, body: JSON.stringify({ error: "El proveedor de IA rechazó la solicitud." }) };
+if (!response.ok) {
+  console.error("Error de OpenAI:", response.status, payload);
+  return {
+    statusCode: 502,
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      error: payload.error?.message || `Error del proveedor de IA (${response.status}).`
+    })
+  };
+}
     const answer = payload.choices?.[0]?.message?.content || payload.output_text || "No pude generar una respuesta.";
     return { statusCode: 200, headers: { "Content-Type": "application/json" }, body: JSON.stringify({ answer, references: [] }) };
   } catch (error) {
