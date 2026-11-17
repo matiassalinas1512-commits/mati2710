@@ -1,44 +1,94 @@
-// Netlify Function: conecta el chat con un proveedor de IA desde el servidor.
-// Configurá AI_API_KEY y AI_API_URL en Netlify > Site configuration > Environment variables.
-// Nunca pongas claves privadas dentro del HTML.
+
 exports.handler = async (event) => {
-  if (event.httpMethod !== "POST") return { statusCode: 405, body: JSON.stringify({ error: "Método no permitido" }) };
+  if (event.httpMethod !== "POST") {
+    return {
+      statusCode: 405,
+      body: JSON.stringify({ error: "Método no permitido" })
+    };
+  }
+
   try {
     const { question } = JSON.parse(event.body || "{}");
+
     if (!question || typeof question !== "string" || question.length > 4000) {
-      return { statusCode: 400, body: JSON.stringify({ error: "Pregunta vacía o demasiado larga." }) };
-    }
-    if (!process.env.AI_API_KEY || !process.env.AI_API_URL) {
-      return { statusCode: 503, body: JSON.stringify({ error: "Falta configurar el proveedor de IA." }) };
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ error: "Pregunta vacía o demasiado larga." })
+      };
     }
 
-    // Adaptar este bloque al formato del proveedor elegido.
-    const response = await fetch(process.env.AI_API_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "Authorization": `Bearer ${process.env.AI_API_KEY}` },
-      body: JSON.stringify({
-        model: process.env.AI_MODEL || "gpt-4.1-mini",
-        messages: [
-          { role: "system", content: "Sos Luz y Verdad, un asistente de estudio cristiano. Respondé en español con tono natural, cálido y profundo. Fundamentá tus afirmaciones en referencias bíblicas verificables. No inventes citas ni atribuyas a Dios mensajes personales. Diferenciá el texto bíblico de las interpretaciones. Si no podés verificar un versículo, decilo claramente. No reemplaces ayuda médica, psicológica, legal ni acompañamiento pastoral." },
-          { role: "user", content: question }
-        ],
-        temperature: 0.4
-      })
-    });
+    const apiKey = process.env.AI_API_KEY;
+    const model = process.env.AI_MODEL || "gemini-3.6-flash";
+
+    if (!apiKey) {
+      return {
+        statusCode: 503,
+        body: JSON.stringify({ error: "Falta configurar la clave de Gemini." })
+      };
+    }
+
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-goog-api-key": apiKey
+        },
+        body: JSON.stringify({
+          systemInstruction: {
+            parts: [{
+              text: "Sos Luz y Verdad, un asistente de estudio cristiano. Respondé siempre en español, con tono natural, cálido y profundo. Fundamentá tus afirmaciones en referencias bíblicas verificables. No inventes versículos ni atribuyas a Dios mensajes personales. Diferenciá el texto bíblico de las interpretaciones. Si no podés verificar un versículo, decilo claramente. No reemplaces ayuda médica, psicológica, legal ni acompañamiento pastoral."
+            }]
+          },
+          contents: [{
+            role: "user",
+            parts: [{ text: question }]
+          }],
+          generationConfig: {
+            temperature: 0.4,
+            maxOutputTokens: 1200
+          }
+        })
+      }
+    );
+
     const payload = await response.json();
-if (!response.ok) {
-  console.error("Error de OpenAI:", response.status, payload);
-  return {
-    statusCode: 502,
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      error: payload.error?.message || `Error del proveedor de IA (${response.status}).`
-    })
-  };
-}
-    const answer = payload.choices?.[0]?.message?.content || payload.output_text || "No pude generar una respuesta.";
-    return { statusCode: 200, headers: { "Content-Type": "application/json" }, body: JSON.stringify({ answer, references: [] }) };
+
+    if (!response.ok) {
+      console.error("Error de Gemini:", response.status, payload);
+
+      return {
+        statusCode: 502,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          error: payload.error?.message || "Error al conectar con Gemini."
+        })
+      };
+    }
+
+    const answer =
+      payload.candidates?.[0]?.content?.parts
+        ?.map(part => part.text || "")
+        .join("") || "No pude generar una respuesta.";
+
+    return {
+      statusCode: 200,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        answer,
+        references: []
+      })
+    };
+
   } catch (error) {
-    return { statusCode: 500, body: JSON.stringify({ error: "Error interno al procesar la pregunta." }) };
+    console.error("Error interno:", error);
+
+    return {
+      statusCode: 500,
+      body: JSON.stringify({
+        error: "Error interno al procesar la pregunta."
+      })
+    };
   }
 };
