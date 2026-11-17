@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="es">
 <head>
@@ -7,35 +8,84 @@
 <title>Luz y Verdad — IA cristiana</title>
 <style>
 :root{--bg:#0e1715;--panel:#172421;--panel2:#1d2c28;--gold:#d6b875;--cream:#f4f0e6;--muted:#a9b6ae;--line:#30423c;--green:#a8c3ad}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -20%,#30463d 0,#111d19 42%,#0b1210 100%);color:var(--cream);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at 50% -20%,#30463d 0,#111d19 42%,#0b1210 100%);color:var(--cream);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh}
 header{height:74px;border-bottom:1px solid #ffffff18;display:flex;align-items:center;justify-content:space-between;padding:0 max(22px,calc((100vw - 1100px)/2));backdrop-filter:blur(12px);position:sticky;top:0;background:#101a18df;z-index:2}
-.brand{display:flex;gap:12px;align-items:center}.logo{width:40px;height:40px;border:1px solid #d6b87588;border-radius:13px;display:grid;place-items:center;color:var(--gold);font-size:21px}.brand strong{display:block;letter-spacing:.3px}.brand small{display:block;color:var(--muted);font-size:11px;letter-spacing:1.5px}
+.brand{display:flex;gap:12px;align-items:center}
+.logo{width:40px;height:40px;border:1px solid #d6b87588;border-radius:13px;display:grid;place-items:center;color:var(--gold);font-size:21px}
+.brand strong{display:block;letter-spacing:.3px}
+.brand small{display:block;color:var(--muted);font-size:11px;letter-spacing:1.5px}
 .pill{border:1px solid #d6b87566;color:var(--gold);padding:6px 11px;border-radius:30px;font-size:12px}
-main{max-width:900px;margin:0 auto;padding:48px 20px 28px}.hero{text-align:center;margin-bottom:30px}.eyebrow{color:var(--gold);text-transform:uppercase;letter-spacing:3px;font-size:11px;font-weight:700}.hero h1{font:500 clamp(34px,6vw,54px)/1.1 Georgia,serif;margin:10px 0}.hero p{color:var(--muted);max-width:590px;margin:0 auto}
-.chat{background:#13201c;border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:0 24px 80px #0005}.chat-top{padding:16px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.chat-top b{font-size:14px}.chat-top span{font-size:12px;color:var(--green)}
-.messages{padding:22px;min-height:330px;max-height:54vh;overflow:auto;display:flex;flex-direction:column;gap:16px}.welcome{text-align:center;margin:auto;max-width:510px;color:var(--muted);padding:25px 8px}.welcome .book{font-size:34px;color:var(--gold)}.welcome h2{font:500 25px Georgia,serif;color:var(--cream);margin:8px}.welcome p{margin:6px 0 18px}.suggestions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}.suggestions button{background:#1c2c26;border:1px solid var(--line);color:#dce6dd;border-radius:30px;padding:8px 12px;cursor:pointer;font-size:12px}
-.msg{max-width:82%;padding:13px 16px;border-radius:16px;white-space:pre-wrap}.user{align-self:flex-end;background:#30483d;color:#fff;border-bottom-right-radius:4px}.assistant{align-self:flex-start;background:#1d2c28;border:1px solid #344940;border-bottom-left-radius:4px}.refs{display:block;color:var(--gold);font-size:12px;margin-top:10px}.typing{color:var(--muted);font-size:13px;font-style:italic}
-.composer{padding:16px;border-top:1px solid var(--line);background:#111c18}.inputrow{display:flex;gap:10px;background:#1b2a25;border:1px solid #3a5046;border-radius:16px;padding:8px}.inputrow textarea{flex:1;resize:none;min-height:48px;max-height:140px;border:0;outline:0;background:transparent;color:var(--cream);font:inherit;padding:10px}.inputrow button{border:0;background:var(--gold);color:#18211d;font-weight:700;border-radius:12px;padding:0 19px;cursor:pointer}.inputrow button:disabled{opacity:.5;cursor:wait}.hint{text-align:center;color:#84948b;font-size:11px;margin-top:9px}
-footer{text-align:center;color:#75847c;font-size:12px;padding:15px 20px 35px}.footerlinks{margin-top:7px;color:var(--gold)}
-@media(max-width:600px){header{height:64px;padding:0 15px}.pill{font-size:10px}main{padding:34px 12px 20px}.messages{padding:15px;min-height:350px}.msg{max-width:94%}.inputrow button{padding:0 13px}}
+main{max-width:900px;margin:0 auto;padding:48px 20px 28px}
+.hero{text-align:center;margin-bottom:30px}
+.eyebrow{color:var(--gold);text-transform:uppercase;letter-spacing:3px;font-size:11px;font-weight:700}
+.hero h1{font:500 clamp(34px,6vw,54px)/1.1 Georgia,serif;margin:10px 0}
+.hero p{color:var(--muted);max-width:590px;margin:0 auto}
+.chat{background:#13201c;border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:0 24px 80px #0005}
+.chat-top{padding:16px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+.chat-top b{font-size:14px}
+.chat-top span{font-size:12px;color:var(--green)}
+.messages{padding:22px;min-height:330px;max-height:54vh;overflow:auto;display:flex;flex-direction:column;gap:16px}
+.welcome{text-align:center;margin:auto;max-width:510px;color:var(--muted);padding:25px 8px}
+.welcome .book{font-size:34px;color:var(--gold)}
+.welcome h2{font:500 25px Georgia,serif;color:var(--cream);margin:8px}
+.welcome p{margin:6px 0 18px}
+.suggestions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.suggestions button{background:#1c2c26;border:1px solid var(--line);color:#dce6dd;border-radius:30px;padding:8px 12px;cursor:pointer;font-size:12px}
+.msg{max-width:82%;padding:13px 16px;border-radius:16px;white-space:pre-wrap;overflow-wrap:anywhere}
+.user{align-self:flex-end;background:#30483d;color:#fff;border-bottom-right-radius:4px}
+.assistant{align-self:flex-start;background:#1d2c28;border:1px solid #344940;border-bottom-left-radius:4px}
+.error{border-color:#a94b45;color:#ffe0dc}
+.refs{display:block;color:var(--gold);font-size:12px;margin-top:10px}
+.typing{color:var(--muted);font-size:13px;font-style:italic}
+.composer{padding:16px;border-top:1px solid var(--line);background:#111c18}
+.inputrow{display:flex;gap:10px;background:#1b2a25;border:1px solid #3a5046;border-radius:16px;padding:8px}
+.inputrow textarea{flex:1;resize:none;min-height:48px;max-height:140px;border:0;outline:0;background:transparent;color:var(--cream);font:inherit;padding:10px}
+.inputrow button{border:0;background:var(--gold);color:#18211d;font-weight:700;border-radius:12px;padding:0 19px;cursor:pointer}
+.inputrow button:disabled{opacity:.5;cursor:wait}
+.hint{text-align:center;color:#84948b;font-size:11px;margin-top:9px}
+footer{text-align:center;color:#75847c;font-size:12px;padding:15px 20px 35px}
+.footerlinks{margin-top:7px;color:var(--gold)}
+@media(max-width:600px){
+header{height:64px;padding:0 15px}
+.pill{font-size:10px}
+main{padding:34px 12px 20px}
+.messages{padding:15px;min-height:350px}
+.msg{max-width:94%}
+.inputrow button{padding:0 13px}
+}
 </style>
 </head>
 <body>
+
 <header>
-  <div class="brand"><div class="logo">✧</div><div><strong>Luz y Verdad</strong><small>INTELIGENCIA ARTIFICIAL CRISTIANA</small></div></div>
+  <div class="brand">
+    <div class="logo">✧</div>
+    <div>
+      <strong>Luz y Verdad</strong>
+      <small>INTELIGENCIA ARTIFICIAL CRISTIANA</small>
+    </div>
+  </div>
   <div class="pill">Reina-Valera 1960</div>
 </header>
+
 <main>
   <section class="hero">
     <div class="eyebrow">Una conversación con fundamento bíblico</div>
     <h1>Busquemos juntos la verdad.</h1>
     <p>Un espacio para hacer preguntas sobre la fe, estudiar las Escrituras y reflexionar a la luz de la Palabra de Dios.</p>
   </section>
+
   <section class="chat">
-    <div class="chat-top"><b>✧ Conversación</b><span>● Lista para escucharte</span></div>
+    <div class="chat-top">
+      <b>✧ Conversación</b>
+      <span>● Lista para escucharte</span>
+    </div>
+
     <div class="messages" id="messages" aria-live="polite">
       <div class="welcome" id="welcome">
-        <div class="book">✝</div><h2>¿Qué hay en tu corazón hoy?</h2>
+        <div class="book">✝</div>
+        <h2>¿Qué hay en tu corazón hoy?</h2>
         <p>Podés preguntar sobre un pasaje bíblico, una inquietud espiritual o una situación de tu vida.</p>
         <div class="suggestions">
           <button data-q="¿Qué enseña la Biblia sobre el perdón?">El perdón</button>
@@ -44,6 +94,7 @@ footer{text-align:center;color:#75847c;font-size:12px;padding:15px 20px 35px}.fo
         </div>
       </div>
     </div>
+
     <form class="composer" id="chatForm">
       <div class="inputrow">
         <textarea id="question" placeholder="Escribí tu pregunta..." rows="1" required></textarea>
@@ -53,16 +104,115 @@ footer{text-align:center;color:#75847c;font-size:12px;padding:15px 20px 35px}.fo
     </form>
   </section>
 </main>
-<footer>LUZ Y VERDAD · Fe, conocimiento y reflexión.<div class="footerlinks">La Palabra como fundamento. La verdad con amor.</div></footer>
+
+<footer>
+  LUZ Y VERDAD · Fe, conocimiento y reflexión.
+  <div class="footerlinks">La Palabra como fundamento. La verdad con amor.</div>
+</footer>
+
 <script>
-const form=document.getElementById('chatForm'), input=document.getElementById('question'), messages=document.getElementById('messages'), send=document.getElementById('send');
-function addMessage(text,who,refs=[]){const el=document.createElement('div');el.className='msg '+who;el.textContent=text;if(refs.length){const r=document.createElement('span');r.className='refs';r.textContent='Referencias bíblicas: '+refs.join(' · ');el.appendChild(r)}messages.appendChild(el);messages.scrollTop=messages.scrollHeight}
-async function ask(q){document.getElementById('welcome')?.remove();addMessage(q,'user');const wait=document.createElement('div');wait.className='typing';wait.textContent='Luz y Verdad está preparando una respuesta...';messages.appendChild(wait);send.disabled=true;
-try{const res=await fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q})});const data=await res.json();wait.remove();if(!res.ok)throw new Error(data.error||'No se pudo obtener una respuesta.');addMessage(data.answer||'No recibí una respuesta.', 'assistant',data.references||[])}
-catch(e){wait.remove();addMessage('Todavía falta configurar el servicio de inteligencia artificial. La interfaz ya está lista. Cuando agreguemos la clave del proveedor y conectemos la búsqueda bíblica, podré responder tus preguntas.','assistant')}
-finally{send.disabled=false;input.focus()}}
-form.addEventListener('submit',e=>{e.preventDefault();const q=input.value.trim();if(!q)return;input.value='';ask(q)});
-input.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();form.requestSubmit()}});
-document.querySelectorAll('[data-q]').forEach(b=>b.addEventListener('click',()=>ask(b.dataset.q)));
+const form = document.getElementById('chatForm');
+const input = document.getElementById('question');
+const messages = document.getElementById('messages');
+const send = document.getElementById('send');
+
+function addMessage(text, who, refs = [], isError = false) {
+  const el = document.createElement('div');
+  el.className = 'msg ' + who + (isError ? ' error' : '');
+  el.textContent = text;
+
+  if (refs && refs.length) {
+    const r = document.createElement('span');
+    r.className = 'refs';
+    r.textContent = 'Referencias bíblicas: ' + refs.join(' · ');
+    el.appendChild(r);
+  }
+
+  messages.appendChild(el);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+async function ask(q) {
+  document.getElementById('welcome')?.remove();
+
+  addMessage(q, 'user');
+
+  const wait = document.createElement('div');
+  wait.className = 'typing';
+  wait.textContent = 'Luz y Verdad está preparando una respuesta...';
+  messages.appendChild(wait);
+
+  send.disabled = true;
+
+  try {
+    const res = await fetch('/.netlify/functions/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ question: q })
+    });
+
+    let data;
+
+    try {
+      data = await res.json();
+    } catch {
+      throw new Error('El servidor devolvió una respuesta que no es JSON. Revisá los registros de Netlify.');
+    }
+
+    if (!res.ok) {
+      throw new Error(data.error || 'Error del servidor: ' + res.status);
+    }
+
+    if (!data.answer) {
+      throw new Error('El servicio respondió, pero no devolvió una respuesta.');
+    }
+
+    wait.remove();
+    addMessage(data.answer, 'assistant', data.references || []);
+
+  } catch (e) {
+    wait.remove();
+
+    const mensaje = e.message || 'Error desconocido de conexión.';
+
+    addMessage(
+      'No pude obtener una respuesta.\n\nDetalle del error: ' + mensaje,
+      'assistant',
+      [],
+      true
+    );
+
+    console.error('Error en Luz y Verdad:', e);
+
+  } finally {
+    send.disabled = false;
+    input.focus();
+  }
+}
+
+form.addEventListener('submit', e => {
+  e.preventDefault();
+
+  const q = input.value.trim();
+  if (!q) return;
+
+  input.value = '';
+  ask(q);
+});
+
+input.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    form.requestSubmit();
+  }
+});
+
+document.querySelectorAll('[data-q]').forEach(b => {
+  b.addEventListener('click', () => ask(b.dataset.q));
+});
 </script>
-</body></html>
+
+</body>
+</html>
